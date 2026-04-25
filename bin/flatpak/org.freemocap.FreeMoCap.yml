@@ -25,7 +25,7 @@ modules:
   - name: freemocap-pkg
     buildsystem: simple
     build-commands: # TODO: If you want to upload to flathub.org, the flatpak build needs to run offline, so: --no-deps
-      - pip3 install --prefix=/app --no-build-isolation .
+      - pip3 install --prefix=/app .
     sources:
       - type: dir
         path: ../..

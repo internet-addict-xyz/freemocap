@@ -15,16 +15,18 @@ finish-args:
 # TODO: change filesystem=home to only absolutely needed folders if you want to commit it to flathub.org in the future
 
 modules:
+  - python3-freemocap.json
+
   - name: freemocap
     buildsystem: simple
     build-commands:
-      - install -Dm755 freemocap_app /app/bin/freemocap
+      - install -Dm755 freemocap.sh /app/bin/freemocap
       - install -Dm644 org.freemocap.FreeMoCap.desktop /app/share/applications/org.freemocap.FreeMoCap.desktop
       - install -Dm644 org.freemocap.FreeMoCap.metainfo.xml /app/share/metainfo/org.freemocap.FreeMoCap.metainfo.xml
-      - install -Dm644 freemocap-logo.svg /app/share/icons/hicolor/scalable/apps/org.freemocap.FreeMoCap.svg
+      - install -Dm644 org.freemocap.FreeMoCap.svg /app/share/icons/hicolor/scalable/apps/org.freemocap.FreeMoCap.svg
     sources:
       - type: file
-        path: ../../freemocap_app
+        path: freemocap.sh
       - type: file
         path: org.freemocap.FreeMoCap.desktop
       - type: file

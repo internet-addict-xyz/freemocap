@@ -1,0 +1,35 @@
+name: Create Flatpak Bundle
+
+on:
+  workflow_dispatch:
+  push:
+    tags: [ v* ]
+
+jobs:
+  build:
+    name: Build Flatpak Bundle
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-25.08
+      options: --privileged
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+      - name: Generate pip sources
+        run: |
+          pip3 install aiohttp requirements-parser toml
+          curl -LO "https://raw.githubusercontent.com/flatpak/flatpak-builder-tools/master/pip/flatpak-pip-generator"
+          python3 flatpak-pip-generator --python-version 3.13 freemocap==1.8.2 -o bin/flatpak/python3-freemocap
+      - uses: flatpak/flatpak-github-actions/flatpak-builder@bf5cafdfd97dcf5a89c7475bbc86a616e1f86acb
+        with:
+          bundle: freemocap.flatpak
+          manifest-path: bin/flatpak/org.freemocap.FreeMoCap.yml
+          cache-key: flatpak-builder-${{ hashFiles('bin/flatpak/org.freemocap.FreeMoCap.yml') }}
+          upload-artifact: false
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: freemocap_linux_flatpak
+          path: freemocap.flatpak

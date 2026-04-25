@@ -21,8 +21,8 @@ jobs:
       - name: Generate pip sources
         run: |
           pip3 install aiohttp requirements-parser toml
-          curl -LO "https://raw.githubusercontent.com/flatpak/flatpak-builder-tools/master/pip/flatpak-pip-generator"
-          python3 flatpak-pip-generator --python-version 3.13 freemocap==1.8.2 -o bin/flatpak/python3-freemocap
+          curl -LO "https://raw.githubusercontent.com/flatpak/flatpak-builder-tools/main/pip/flatpak-pip-generator.py"
+          python3 flatpak-pip-generator.py --python-version 3.13 freemocap==1.8.2 -o bin/flatpak/python3-freemocap
       - uses: flatpak/flatpak-github-actions/flatpak-builder@bf5cafdfd97dcf5a89c7475bbc86a616e1f86acb
         with:
           bundle: freemocap.flatpak

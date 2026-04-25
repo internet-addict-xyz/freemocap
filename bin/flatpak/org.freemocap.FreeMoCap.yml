@@ -6,6 +6,11 @@ base: io.qt.PySide.BaseApp
 base-version: "6.10"
 branch: stable
 command: freemocap
+build-options:
+  env:
+    BASEAPP_REMOVE_WEBENGINE: '1'
+cleanup-commands:
+  - /app/cleanup-BaseApp.sh
 finish-args:
   - --share=ipc
   - --share=network

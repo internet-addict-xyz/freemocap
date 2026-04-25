@@ -60,11 +60,11 @@ jobs:
           cd ${{ github.workspace }}
           mv ${{ github.workspace }}/bin/pyapp freemocap_app && chmod +x freemocap_app
           tar -czvf freemocap_app.tar.gz freemocap_app
-      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: freemocap_linux_app
           path: freemocap_app.tar.gz
-      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: freemocap_binary
           path: freemocap_app
@@ -82,13 +82,13 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           persist-credentials: false
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: freemocap_binary
           path: .
       - name: Make binary executable
         run: chmod +x freemocap_app
-      - uses: flatpak/flatpak-github-actions/flatpak-builder@401fe28a8384095fc1531b9d320b292f0ee45adb
+      - uses: flatpak/flatpak-github-actions/flatpak-builder@bf5cafdfd97dcf5a89c7475bbc86a616e1f86acb
         with:
           bundle: freemocap.flatpak
           manifest-path: bin/flatpak/org.freemocap.FreeMoCap.yml

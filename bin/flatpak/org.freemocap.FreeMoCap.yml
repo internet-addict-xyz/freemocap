@@ -28,7 +28,7 @@ modules:
       build-args:
         - --share=network
     build-commands: # TODO: If you want to upload to flathub.org, the flatpak build needs to run offline, so: --no-deps
-      - pip3 install --prefix=/app .
+      - pip3 install --prefix=/app --ignore-requires-python . # Be careful with --ignore-requires-python, currently it uses Python 3.13.12 and not in '<3.13,>=3.10' as freemocap needs
     sources:
       - type: dir
         path: ../..

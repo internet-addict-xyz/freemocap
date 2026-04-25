@@ -18,11 +18,6 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           persist-credentials: false
-      - name: Generate pip sources
-        run: |
-          pip3 install aiohttp requirements-parser toml
-          curl -LO "https://raw.githubusercontent.com/flatpak/flatpak-builder-tools/master/pip/flatpak-pip-generator.py"
-          python3 flatpak-pip-generator.py --runtime org.kde.Sdk//6.10 --pyproject-file pyproject.toml --ignore-pkg pyside6,shiboken6,pyside6-essentials,pyside6-addons -o bin/flatpak/python3-freemocap
       - uses: flatpak/flatpak-github-actions/flatpak-builder@bf5cafdfd97dcf5a89c7475bbc86a616e1f86acb
         with:
           bundle: freemocap.flatpak

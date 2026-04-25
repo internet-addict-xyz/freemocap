@@ -17,12 +17,10 @@ finish-args:
 # TODO: change filesystem=home to only absolutely needed folders if you want to commit it to flathub.org in the future
 
 modules:
-  - python3-freemocap.json
-
   - name: freemocap-pkg
     buildsystem: simple
-    build-commands:
-      - pip3 install --prefix=/app --no-build-isolation --no-deps .
+    build-commands: # TODO: If you want to upload to flathub.org, the flatpak build needs to run offline, so: --no-deps
+      - pip3 install --prefix=/app --no-build-isolation .
     sources:
       - type: dir
         path: ../..

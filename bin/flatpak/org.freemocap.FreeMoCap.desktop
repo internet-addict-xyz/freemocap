@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=FreeMoCap
+Comment=Markerless motion capture system
+Exec=freemocap
+Icon=org.freemocap.FreeMoCap
+Terminal=false
+Categories=Science;Graphics;
+StartupNotify=true

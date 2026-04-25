@@ -24,11 +24,11 @@ modules:
       - install -Dm644 freemocap-logo.svg /app/share/icons/hicolor/scalable/apps/org.freemocap.FreeMoCap.svg
     sources:
       - type: file
-        path: freemocap_app
+        path: ../../freemocap_app
       - type: file
-        path: bin/flatpak/org.freemocap.FreeMoCap.desktop
+        path: org.freemocap.FreeMoCap.desktop
       - type: file
-        path: bin/flatpak/org.freemocap.FreeMoCap.metainfo.xml
+        path: org.freemocap.FreeMoCap.metainfo.xml
       - type: file
-        path: freemocap/assets/logo/freemocap-logo-black-border.svg
+        path: ../../freemocap/assets/logo/freemocap-logo-black-border.svg
         dest-filename: freemocap-logo.svg

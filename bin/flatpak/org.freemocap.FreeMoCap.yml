@@ -1,6 +1,6 @@
 app-id: org.freemocap.FreeMoCap
 runtime: org.freedesktop.Platform
-runtime-version: "25.08"
+runtime-version: "24.08"
 sdk: org.freedesktop.Sdk
 branch: stable
 command: freemocap
@@ -16,6 +16,14 @@ finish-args:
 
 modules:
   - python3-freemocap.json
+
+  - name: freemocap-pkg
+    buildsystem: simple
+    build-commands:
+      - pip3 install --prefix=/app --no-build-isolation --no-deps .
+    sources:
+      - type: dir
+        path: ../..
 
   - name: freemocap
     buildsystem: simple

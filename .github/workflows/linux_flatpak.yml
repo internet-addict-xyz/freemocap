@@ -10,7 +10,7 @@ jobs:
     name: Build Flatpak Bundle
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-24.08
+      image: ghcr.io/flathub-infra/flatpak-github-actions:kde-6.10
       options: --privileged
     permissions:
       contents: read
@@ -22,7 +22,7 @@ jobs:
         run: |
           pip3 install aiohttp requirements-parser toml
           curl -LO "https://raw.githubusercontent.com/flatpak/flatpak-builder-tools/master/pip/flatpak-pip-generator.py"
-          python3 flatpak-pip-generator.py --pyproject-file pyproject.toml -o bin/flatpak/python3-freemocap
+          python3 flatpak-pip-generator.py --pyproject-file pyproject.toml --ignore-pkg pyside6,shiboken6,pyside6-essentials,pyside6-addons -o bin/flatpak/python3-freemocap
       - uses: flatpak/flatpak-github-actions/flatpak-builder@bf5cafdfd97dcf5a89c7475bbc86a616e1f86acb
         with:
           bundle: freemocap.flatpak

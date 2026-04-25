@@ -72,7 +72,7 @@ jobs:
   build-flatpak:
     name: Build Flatpak Bundle
     runs-on: ubuntu-latest
-    needs: build-binary
+    needs: build
     container:
       image: ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-25.08
       options: --privileged

@@ -30,5 +30,5 @@ modules:
       - type: file
         path: org.freemocap.FreeMoCap.metainfo.xml
       - type: file
-        path: ../../freemocap/assets/logo/freemocap-logo-black-border.svg
+        path: org.freemocap.FreeMoCap.svg
         dest-filename: freemocap-logo.svg

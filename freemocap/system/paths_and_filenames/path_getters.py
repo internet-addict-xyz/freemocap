@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Optional, Union
 
 import toml
+from platformdirs import user_config_dir
 
 from freemocap.gui.qt.utilities.save_and_load_gui_state import load_gui_state
 from freemocap.system.paths_and_filenames.file_and_folder_names import (
@@ -175,7 +176,22 @@ def get_most_recent_recording_toml_path():
 
 
 def get_gui_state_json_path():
-    return str(Path(__file__).parent.parent / GUI_STATE_JSON_FILENAME)
+    config_dir = Path(user_config_dir("freemocap"))
+    config_dir.mkdir(parents=True, exist_ok=True)
+    new_path = config_dir / GUI_STATE_JSON_FILENAME
+
+    if not new_path.exists():
+        old_path = Path(__file__).parent.parent / GUI_STATE_JSON_FILENAME
+        if old_path.exists():
+            try:
+                old_path.rename(new_path)
+                logger.info(f"Migrated gui state from {old_path} to {new_path}")
+            except OSError:
+                import shutil
+                shutil.copy2(old_path, new_path)
+                logger.info(f"Copied gui state from {old_path} to {new_path}")
+
+    return str(new_path)
 
 
 def get_most_recent_recording_path(subfolder_str: Optional[str] = None) -> Optional[str]:

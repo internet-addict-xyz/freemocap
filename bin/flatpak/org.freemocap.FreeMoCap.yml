@@ -1,9 +1,9 @@
 app-id: org.freemocap.FreeMoCap
 runtime: org.kde.Platform
-runtime-version: "6.10"
+runtime-version: "6.9"
 sdk: org.kde.Sdk
 base: io.qt.PySide.BaseApp
-base-version: "6.10"
+base-version: "6.9" # Ships with Python 3.12.12, newer 6.10 uses Python 3.13+ which is currently incompatible
 branch: stable
 command: freemocap
 build-options:
@@ -27,8 +27,9 @@ modules:
     build-options:
       build-args:
         - --share=network
-    build-commands: # TODO: If you want to upload to flathub.org, the flatpak build needs to run offline, so: --no-deps
-      - pip3 install --prefix=/app --ignore-requires-python . # Be careful with --ignore-requires-python, currently it uses Python 3.13.12 and not in '<3.13,>=3.10' as freemocap needs
+    build-commands: # TODO: If you want to upload to flathub.org, the flatpak build needs to run offline
+      - pip3 install --prefix=/app uv
+      - uv pip install --prefix=/app --python python3 .
     sources:
       - type: dir
         path: ../..
@@ -49,4 +50,3 @@ modules:
         path: org.freemocap.FreeMoCap.metainfo.xml
       - type: file
         path: org.freemocap.FreeMoCap.svg
-        dest-filename: freemocap-logo.svg
